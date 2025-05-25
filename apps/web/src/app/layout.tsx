@@ -1,10 +1,11 @@
 import Navbar from '../components/navbar'
 import NavbarContainer from '../components/navbarContainer'
-import NavbarProvider from '../components/navbarProvider'
-import QueryProvider from '../components/queryProvider'
+import StoreProvider from '../components/providers/storeProvider'
+import QueryProvider from '../components/providers/queryProvider'
 import { getSession } from '../lib/session'
 
 import './global.css';
+import { Toaster } from 'sonner'
 
 // export const metadata = {
 //   title: 'Welcome to web',
@@ -21,12 +22,13 @@ export default async  function RootLayout({
     <html lang="en">
       <body className='bg-gradient-to-b to-gray-800 from-cyan-900 text-white'>
         <QueryProvider>
-          <NavbarProvider >
+          <StoreProvider >
             <NavbarContainer user={session?.user}>
               <Navbar />
             </NavbarContainer>
-          </NavbarProvider>
           {children}
+          <Toaster />
+          </StoreProvider>
         </QueryProvider>
 
         </body>

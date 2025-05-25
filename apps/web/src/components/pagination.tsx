@@ -1,3 +1,5 @@
+"use client"
+
 import React, { MouseEvent } from 'react'
 import { calculatePageNumbers } from '../lib/functions/calculatePageNumbers.'
 import { cn } from '../lib/utils'

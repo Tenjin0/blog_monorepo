@@ -19,8 +19,10 @@ type Comment {
 }
 
 input CreateCommentInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  content: String!
+
+  """post id"""
+  postId: Int!
 }
 
 input CreateLikeInput {
@@ -114,9 +116,11 @@ type Tag {
 }
 
 input UpdateCommentInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  content: String
   id: Int!
+
+  """post id"""
+  postId: Int
 }
 
 input UpdateLikeInput {

@@ -1,12 +1,18 @@
 import { inspect } from "util"
 import { BACKEND_URL } from "../constants"
+import { getSession } from "../session"
 
-export const fetchGraphQL = async (query: string, variables={} ) => {
+export interface IFetchGraphQL {
+  auth: boolean
+}
+export const fetchGraphQL = async (query: string, variables={} , opt?: IFetchGraphQL) => {
   console.log("fetchGraphQL", variables)
+  const accessToken = opt?.auth ? (await getSession())?.accessToken : null
   const response = await fetch(`${BACKEND_URL}/graphql`, {
     method: 'POST',
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "authorization": opt?.auth ? `Bearer ${accessToken}` : ""
     },
     body: JSON.stringify({
       query,

@@ -10,8 +10,36 @@ import { DEFAULT_PAGE_SIZE } from '../common/constants'
 export class CommentService {
   constructor(private prisma: PrismaService) { }
 
-  create(createCommentInput: CreateCommentInput) {
-    return 'This action adds a new comment'
+  create(createCommentInput: CreateCommentInput, authorId: number) {
+    return this.prisma.comment.create({
+      select: {
+        id: true,
+        content:true,
+        createdAt: true,
+        author: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      },
+      data: {
+        content: createCommentInput.content,
+        post: {
+          connect: {
+            id: createCommentInput.postId
+          }
+        },
+        author: {
+          connect: {
+            id: authorId
+          }
+        }
+      }
+    }).then((data) => {
+      console.log(data)
+      return data
+    })
   }
 
   findAll(postId?: number, opt: IFindAllOpt = { take: DEFAULT_PAGE_SIZE, skip: 0 }) {
@@ -19,6 +47,9 @@ export class CommentService {
       take: opt.take, skip: opt.skip,
       include: {
         author: true
+      },
+      orderBy: {
+        createdAt: 'desc'
       }
     }
     if (postId) {

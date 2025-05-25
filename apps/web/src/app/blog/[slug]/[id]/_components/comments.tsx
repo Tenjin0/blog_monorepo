@@ -5,9 +5,13 @@ import { useQuery } from "@tanstack/react-query"
 
 import { fetchComments } from '../../../../../lib/actions/comments.get'
 import { DEFAULT_PAGE_SIZE } from '../../../../../lib/constants'
-import CommentCard from './comment.card'
+import CommentCard from './commentCard'
 import Pagination from '../../../../../components/pagination'
-import CommentCardSkeleton from './comment.card.skeleton'
+import CommentCardSkeleton from './commentCardSkeleton'
+import AddComment from './addComment'
+import { IUserSession } from '../../../../../lib/types/user.types'
+import { IStoreState } from '../../../../../lib/types/store.state'
+import { useSelector } from 'react-redux'
 
 type Props = {
   postID: number
@@ -20,8 +24,8 @@ const Comments = ({ postID }: Props) => {
     queryKey: ['GET_COMMENTS_BY_POST', postID, page],
     queryFn: () => { return fetchComments(postID, {pageSize: DEFAULT_PAGE_SIZE, page}).then((data) => { setTotal(Math.ceil(data.count / DEFAULT_PAGE_SIZE));return {comments: data.comments}})}
   })
+  const user: IUserSession = useSelector<IStoreState, IUserSession>((state) => state.user)
 
-  console.log(data?.comments)
   const onClickPage = (page: number) => {
     setPage(page)
     refetch()
@@ -29,6 +33,7 @@ const Comments = ({ postID }: Props) => {
   return (
     <div className='p-2 rounded-md shadow-md'>
       <h6 className='text-lg'>Comments</h6>
+      { user && user.id && <AddComment user={user} postId={postID}/>}
       <div className='flex flex-col gap-4'>
         { isLoading ?
           Array.from({length: DEFAULT_PAGE_SIZE}).map((_, index) => <CommentCardSkeleton key={`comment-card-skeleton-${index}`}/>) :

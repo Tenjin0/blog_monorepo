@@ -14,3 +14,18 @@ interface ISignUpFormState {
 }
 
 export type TSignUpFormState = ISignUpFormState | undefined
+
+
+interface ICreateCommentFormState {
+  data?: {
+    content?: string
+  }
+  errors?: {
+    content?: string[]
+  },
+  message?: string
+  ok?: boolean
+  open?: boolean
+}
+
+export type TCreateCommentFormState = ICreateCommentFormState | undefined

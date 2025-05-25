@@ -10,7 +10,6 @@ import { signIn } from '../../../../lib/actions/auth'
 
 const SignInform = () => {
   const [state, action] = useActionState(signIn, undefined)
-  console.log(state)
   return (
     <form action={action} className="flex flex-col gap-3 [&>div]:flex [&>div]:flex-col [&>div]:gap-2">
       {
