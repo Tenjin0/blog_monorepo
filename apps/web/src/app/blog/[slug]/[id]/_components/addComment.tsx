@@ -18,7 +18,6 @@ const AddComment = ({ user, postId }: Props) => {
   const [state, action] = useActionState(createComment, undefined)
   const [open, setOpen] = useState(false)
   useEffect(() => {
-    console.log('use effect', state)
     if (state?.ok) {
       toast.success(state.message ?? 'Ok', )
       setOpen(false)
