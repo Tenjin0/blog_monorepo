@@ -17,5 +17,9 @@ export default [
   ...nx.configs['flat/react-typescript'],
   {
     ignores: ['.next/**/*'],
+    "rules": {
+      "@next/next/no-document-import-in-page": "off"
+    }
   },
+
 ];
