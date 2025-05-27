@@ -20,7 +20,6 @@ mutation createUser($input: CreateUserInput!) {
 
 
 export async function signUp(state: TSignUpFormState, formData: FormData): Promise<TSignUpFormState> {
-  console.log('signup', state, Object.fromEntries(formData.entries()))
   const validateFields = SignUpFormSchema.safeParse(Object.fromEntries(formData.entries()))
   if (!validateFields.success)
     return {

@@ -52,7 +52,8 @@
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint"
-      }
+      },
+      "exclude": ["apps/web/.next/**/*"]
     },
     {
       "plugin": "@nx/jest/plugin",

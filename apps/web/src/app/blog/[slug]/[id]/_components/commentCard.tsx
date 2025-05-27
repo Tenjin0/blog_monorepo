@@ -15,7 +15,7 @@ const CommentCard = ({ comment }: Props) => {
              <UserIcon className="w-10" />
           </AvatarFallback>
         </Avatar>
-        <p> { comment.author.name} | </p>
+        <p> { comment.author.name}</p> |
         <p> {new Date( comment.createdAt ).toLocaleDateString()} </p>
       </div>
       <p className='mt-4'>{comment.content}</p>

@@ -2,6 +2,8 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateLikeInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => Int, { description: 'post id' })
+  postId: number;
+  @Field(() => Int, { description: 'user id' })
+  userId: number;
 }

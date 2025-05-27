@@ -5,6 +5,7 @@
   "name": "@blog-monorepo/api",
   "version": "0.0.1",
   "private": true,
+  "type": "commonjs",
   "nx": {
     "targets": {
       "build": {

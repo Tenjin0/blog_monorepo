@@ -31,10 +31,10 @@ const Comments = ({ postID }: Props) => {
     refetch()
   }
   return (
-    <div className='p-2 rounded-md shadow-md'>
-      <h6 className='text-lg'>Comments</h6>
+    <div className='mt-4 rounded-md shadow-md flex flex-col items-start gap-4'>
+      <h6 className='text-2xl p-2 pl-4 border border-cyan-950 outline-0 rounded-md shadow-md self-stretch'>Comments</h6>
       { user && user.id && <AddComment user={user} postId={postID}/>}
-      <div className='flex flex-col gap-4'>
+      <div className='flex flex-col gap-4 p-2'>
         { isLoading ?
           Array.from({length: DEFAULT_PAGE_SIZE}).map((_, index) => <CommentCardSkeleton key={`comment-card-skeleton-${index}`}/>) :
           data?.comments.map((comment) => <CommentCard key={`comment-card-${comment.id}`} comment={comment}/>)

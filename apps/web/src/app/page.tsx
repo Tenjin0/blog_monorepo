@@ -1,7 +1,7 @@
 import Hero from '../components/hero'
 import Posts from '../components/posts'
 import { fetchPosts } from '../lib/actions/posts.get'
-import styles from './page.module.scss';
+// import styles from './page.module.scss';
 import { DEFAULT_PAGE_SIZE} from '../lib/constants'
 
 type Props = {

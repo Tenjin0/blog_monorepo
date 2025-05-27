@@ -14,7 +14,7 @@
 
     "target": "es2021"
   },
-  "include": ["src/**/*.ts", "prisma.config.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": [
     "out-tsc",
     "dist",

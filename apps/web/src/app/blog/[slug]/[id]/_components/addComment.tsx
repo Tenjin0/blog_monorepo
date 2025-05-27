@@ -30,7 +30,7 @@ const AddComment = ({ user, postId }: Props) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button onClick={() => setOpen(true)}>Leave Your Comment</Button>
+        <Button className='self-center' onClick={() => setOpen(true)}>Leave Your Comment</Button>
       </DialogTrigger>
       <DialogContent className='text-black'>
         <DialogTitle>Write a comment</DialogTitle>

@@ -1,8 +1,9 @@
-import React, { use, useState } from 'react'
+import React, { use } from 'react'
 import { fetchPost } from '../../../../lib/actions/post.get'
 import Image from 'next/image'
 import Content from './_components/content'
 import Comments from './_components/comments'
+import Like from './_components/Like'
 type Props = {
   params:Promise< {
     id: string
@@ -25,7 +26,7 @@ const PostPage = (props: Props) => {
           src={post.thumbnail ?? '/no-image.png'} alt={post.title} fill></Image>
       </div>
       <Content content={post.content}/>
-
+      <Like postId={post.id}/>
       <Comments postID={ post.id }></Comments>
     </main>
   )
