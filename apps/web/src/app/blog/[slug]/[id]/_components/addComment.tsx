@@ -19,14 +19,13 @@ const AddComment = ({ user, postId }: Props) => {
   const [open, setOpen] = useState(false)
   useEffect(() => {
     if (state?.ok) {
-      toast.success(state.message ?? 'Ok', )
+      toast.success(state.message ?? 'Ok',)
       setOpen(false)
     } else if (state?.message) {
       toast.error(state.message)
     }
   }, [state])
 
-  // console.log('addComment')
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -34,16 +33,16 @@ const AddComment = ({ user, postId }: Props) => {
       </DialogTrigger>
       <DialogContent className='text-black'>
         <DialogTitle>Write a comment</DialogTitle>
-        <form action={action} className="flex flex-col gap-2 items-start">
-          <input name="postId" type="hidden" defaultValue={postId} />
-          <Textarea name="content" rows={3}className='border active:outline:none focus-visible:ring-0 shadow'></Textarea>
-          { state?.errors?.content && <p className='text-red-500 shake-animation' >{state.errors.content}</p> }
-          <p className='p-2 self-end'>
-            <span className='pr-2 text-slate-400'>Write as</span>
-            <span className='text-slate-700'>{user.name}</span>
-          </p>
-          <SubmitButton className='text-center self-center'>Submit</SubmitButton>
-        </form>
+          <form action={action} className="flex flex-col gap-2 items-start">
+            <input name="postId" type="hidden" defaultValue={postId} />
+            <Textarea name="content" rows={3} className='border active:outline:none focus-visible:ring-0 shadow'></Textarea>
+            {state?.errors?.content && <p className='text-red-500 shake-animation' >{state.errors.content}</p>}
+            <p className='p-2 self-end'>
+              <span className='pr-2 text-slate-400'>Write as</span>
+              <span className='text-slate-700'>{user.name}</span>
+            </p>
+            <SubmitButton className='text-center self-center'>Submit</SubmitButton>
+          </form>
       </DialogContent>
     </Dialog>
   )

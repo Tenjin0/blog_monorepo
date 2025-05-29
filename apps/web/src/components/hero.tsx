@@ -3,7 +3,7 @@ import React from 'react'
 export default function Hero() {
   return (
     <div className="">
-      <div className="container flex items-center justify-self-center h-lvh">
+      <div className="container flex items-center justify-self-center">
         <div className='flex flex-col md:flex-row gap-10'>
           <div className='flex flex-col w-auto justify-center items-stretch md:w-1/2 text-center md:text-left'>
             <p className='capitalize tracking-wide w-full'>

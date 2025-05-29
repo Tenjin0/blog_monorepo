@@ -10,41 +10,68 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard'
 export class PostResolver {
   constructor(private readonly postService: PostService) {}
 
-  @Mutation(() => Post)
-  createPost(@Args('createPostInput') createPostInput: CreatePostInput) {
-    return this.postService.create(createPostInput);
-  }
-
-  // @UseGuards(JwtAuthGuard)
   @Query(() => [Post], { name: 'posts' })
-  // findAll() {
   findAll(
-    // @Context() context,
     @Args('skip', { nullable: true}) skip?: number,
     @Args('take', { nullable: true}) take?: number,
   ) {
-    // console.log(context.req.user)
-    return this.postService.findAll({ skip, take});
+    return this.postService.findAll(null, { skip, take});
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Query(() => [Post], { name: 'user_posts' })
+  findAllByUser(
+    @Context() context: any,
+    @Args('skip', { nullable: true}) skip?: number,
+    @Args('take', { nullable: true}) take?: number,
+  ) {
+    const userId = context.req.user.id
+    return this.postService.findAll(userId, { skip, take});
+  }
+
 
   @Query(() => Post, { name: 'post' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    console.log('id', id)
     return this.postService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Mutation(() => Post)
-  updatePost(@Args('updatePostInput') updatePostInput: UpdatePostInput) {
-    return this.postService.update(updatePostInput.id, updatePostInput);
-  }
+  updatePost(
+    @Context() context: any,
+    @Args('updatePostInput') updatePostInput: UpdatePostInput
+  ) {
+    const userId = context.req.user.id
 
-  @Mutation(() => Post)
-  removePost(@Args('id', { type: () => Int }) id: number) {
-    return this.postService.remove(id);
+    return this.postService.update(userId, updatePostInput);
   }
 
   @Query(() => Int, { name: 'post_count' })
   count() {
     return this.postService.count();
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Query(() => Int, { name: 'user_posts_count' })
+  userCount( @Context() context: any,) {
+    const userId = context.req.user.id
+    return this.postService.count(userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => Boolean)
+  createPost(@Context() context: any, @Args("createPostInput") createPostInput: CreatePostInput) {
+    const userId = context.req.user.id
+    return this.postService.create(createPostInput, userId)
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Mutation(() => Boolean)
+  removePost(
+    @Context() context: any,
+    @Args('id', { type: () => Int }) id: number
+  ) {
+    const userId = context.req.user.id
+    return this.postService.remove(id, userId);
   }
 }

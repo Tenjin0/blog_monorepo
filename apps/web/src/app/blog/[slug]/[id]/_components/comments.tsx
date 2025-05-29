@@ -1,16 +1,16 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useQuery } from "@tanstack/react-query"
 
-import { fetchComments } from '../../../../../lib/actions/comments.get'
-import { DEFAULT_PAGE_SIZE } from '../../../../../lib/constants'
+import { fetchComments } from '@/lib/actions/comments.get'
+import { DEFAULT_PAGE_SIZE } from '@/lib/constants'
 import CommentCard from './commentCard'
-import Pagination from '../../../../../components/pagination'
+import Pagination from '@/components/pagination'
 import CommentCardSkeleton from './commentCardSkeleton'
 import AddComment from './addComment'
-import { IUserSession } from '../../../../../lib/types/user.types'
-import { IStoreState } from '../../../../../lib/types/store.state'
+import { IUserSession } from '@/lib/types/user.types'
+import { IStoreState } from '@/lib/types/store.state'
 import { useSelector } from 'react-redux'
 
 type Props = {
@@ -26,10 +26,10 @@ const Comments = ({ postID }: Props) => {
   })
   const user: IUserSession = useSelector<IStoreState, IUserSession>((state) => state.user)
 
-  const onClickPage = (page: number) => {
-    setPage(page)
-    refetch()
-  }
+    const onClickPage = useCallback((page: number) => {
+      setPage(page)
+      refetch()
+    }, [refetch])
   return (
     <div className='mt-4 rounded-md shadow-md flex flex-col items-start gap-4'>
       <h6 className='text-2xl p-2 pl-4 border border-cyan-950 outline-0 rounded-md shadow-md self-stretch'>Comments</h6>

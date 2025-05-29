@@ -37,6 +37,6 @@ mutation remove($postId: Int!)  {
 }
 `
 export async function removeLikePost(postId: number) {
-    const data = await fetchGraphQL(print(REMOVE_LIKE), {postId}, { auth: true})
+    await fetchGraphQL(print(REMOVE_LIKE), {postId}, { auth: true})
 
 }

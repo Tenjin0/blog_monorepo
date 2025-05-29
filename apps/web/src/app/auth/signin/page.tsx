@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import SignInForm from './_components/form.signin'
+import SignInForm from './_components/SignInForm'
 
 const SignInPage = () => {
   return (

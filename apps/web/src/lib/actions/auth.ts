@@ -65,7 +65,6 @@ export async function signIn(state: TSignUpFormState, formData: FormData): Promi
       }
     })
 
-    console.log(data)
     if (data.errors) {
       return {
         data: Object.fromEntries(formData.entries()),

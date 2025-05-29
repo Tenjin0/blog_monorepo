@@ -18,6 +18,11 @@ type Comment {
   updatedAt: DateTime!
 }
 
+type Count {
+  comments: Int!
+  likes: Int!
+}
+
 input CreateCommentInput {
   content: String!
 
@@ -26,8 +31,16 @@ input CreateCommentInput {
 }
 
 input CreatePostInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """post content"""
+  content: String!
+  published: Boolean!
+  tags: [String!]!
+
+  """post content"""
+  thumbnail: String!
+
+  """title of post (toto)"""
+  title: String!
 }
 
 input CreateTagInput {
@@ -51,12 +64,12 @@ scalar DateTime
 type Mutation {
   createComment(createCommentInput: CreateCommentInput!): Comment!
   createLike(postId: Int!): Boolean!
-  createPost(createPostInput: CreatePostInput!): Post!
+  createPost(createPostInput: CreatePostInput!): Boolean!
   createTag(createTagInput: CreateTagInput!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
   removeComment(id: Int!): Comment!
   removeLike(postId: Int!): Boolean!
-  removePost(id: Int!): Post!
+  removePost(id: Int!): Boolean!
   removeTag(id: Int!): Tag!
   removeUser(id: Int!): User!
   signIn(signInput: SignInInput!): AuthPayload!
@@ -67,6 +80,7 @@ type Mutation {
 }
 
 type Post {
+  _count: Count!
   author: User!
   comments: [Comment!]!
   content: String!
@@ -91,6 +105,8 @@ type Query {
   tag(id: Int!): Tag!
   user(id: Int!): User!
   userLikedPost(postId: Int!): Boolean!
+  user_posts(skip: Float, take: Float): [Post!]!
+  user_posts_count: Int!
 }
 
 input SignInInput {
@@ -113,9 +129,17 @@ input UpdateCommentInput {
 }
 
 input UpdatePostInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  """post content"""
+  content: String
   id: Int!
+  published: Boolean
+  tags: [String!]
+
+  """post content"""
+  thumbnail: String
+
+  """title of post (toto)"""
+  title: String
 }
 
 input UpdateTagInput {

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import SignUpForm from "./_components/form.signup"
+import SignUpForm from "./_components/SignupForm"
 
 
 const SignUpPage = () => {

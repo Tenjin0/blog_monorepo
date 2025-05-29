@@ -115,9 +115,14 @@
     @apply border-border outline-ring/50;
   }
   body {
+    min-height: 100vh;
   }
 }
 
+body {
+  min-height: 100vh;
+  padding-top: 5rem;
+}
 @keyframes shake {
   0%, 100% {
     transform: translateX(0);

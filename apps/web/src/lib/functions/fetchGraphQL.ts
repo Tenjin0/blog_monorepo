@@ -1,4 +1,5 @@
-import { inspect } from "util"
+"use server"
+
 import { BACKEND_URL } from "../constants"
 import { getSession } from "../session"
 
@@ -6,7 +7,7 @@ export interface IFetchGraphQL {
   auth: boolean
 }
 export const fetchGraphQL = async (query: string, variables={} , opt?: IFetchGraphQL) => {
-  console.log("fetchGraphQL", variables)
+
   const accessToken = opt?.auth ? (await getSession())?.accessToken : null
   const response = await fetch(`${BACKEND_URL}/graphql`, {
     method: 'POST',

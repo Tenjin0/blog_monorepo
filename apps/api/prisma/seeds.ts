@@ -1,6 +1,8 @@
 import { Prisma, PrismaClient } from "@prisma/client"
 import { faker } from '@faker-js/faker'
 
+import { generateSlug } from "../src/common/functions/generate_slug"
+
 require('dotenv').config({
 	path: [dirname(__dirname) + '/.env', dirname(__dirname) + '/.env.' + process.env.NODE_ENV,  dirname(__dirname) + '/.env.' + process.env.NODE_ENV + '.local'],
 	override: true,
@@ -21,10 +23,6 @@ const configService = {
 }
 
 const prisma = new PrismaClient({datasourceUrl: configService.get('db').url })
-
-function generateSlug(title: string): string {
-  return title.toLowerCase().trim().replace(/ /g, '-').replace(/[^\w-]+/g, '')
-}
 
 async function main() {
   const users = Array.from({length: 10}).map(() => ({
